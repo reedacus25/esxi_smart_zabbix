@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-03-03T19:57:57Z</date>
+    <groups>
+        <group>
+            <name>Templates/Storage</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>esxi-smart-monit-$device</template>
+            <name>esxi-smart-monit-$device</name>
+            <description>monitoring smart stats for disks in esxi</description>
+            <groups>
+                <group>
+                    <name>Templates/Storage</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>ESXi SMART</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Drive Temperature - $device</name>
+                    <type>TRAP</type>
+                    <key>$org.esxi.smart.$device.drive_temp</key>
+                    <delay>0</delay>
+                    <history>30d</history>
+                    <units>ºC</units>
+                    <applications>
+                        <application>
+                            <name>ESXi SMART</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Health Status - $device</name>
+                    <type>TRAP</type>
+                    <key>$org.esxi.smart.$device.health</key>
+                    <delay>0</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>ESXi SMART</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{regexp(OK,#2)}=0</expression>
+                            <name>Health not OK</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Read Errors - $device</name>
+                    <type>TRAP</type>
+                    <key>$org.esxi.smart.$device.read_errors</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ESXi SMART</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Write Errors - $device</name>
+                    <type>TRAP</type>
+                    <key>$org.esxi.smart.$device.write_errors</key>
+                    <delay>0</delay>
+                    <applications>
+                        <application>
+                            <name>ESXi SMART</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{change()}&gt;0</expression>
+                            <name>Write Error Logged</name>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+</zabbix_export>
