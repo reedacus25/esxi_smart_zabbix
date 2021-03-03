@@ -32,6 +32,4 @@ In the template you need to set:
 
 Once you do a find and replace in the template for each device, and in the scripts, you just need to configure these scripts to run automatically, in crontab for instance.
 
-There are two scripts, because one I only run once a day (slow) to monitor model/serial/firmware changes, while I run the other (fast) every hour to monitor wear/temperature/etc. You can set these intervals to whatever makes sense for you.
-
 Hope this is helpful to someone out there.
