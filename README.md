@@ -26,7 +26,7 @@ In the scripts you need to set:
  
 
 In the template you need to set:
-* device - this is the name of the device as listed by ESXi using `esxcli nvme device list`
+* device - this is the name of the device as listed by ESXi using `esxcli storage core device list`
 * org - same as org above
 
 
